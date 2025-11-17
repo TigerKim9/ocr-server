@@ -4,6 +4,7 @@ FastAPI와 Tesseract를 사용한 로컬 OCR 서버입니다. 이미지에서 �
 
 ## 기능
 
+- ✅ 웹 GUI 인터페이스 (드래그 앤 드롭 지원)
 - ✅ 이미지에서 텍스트 추출
 - ✅ 한글/영어 동시 지원
 - ✅ 신뢰도 점수 제공
@@ -53,7 +54,26 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
 서버가 `http://localhost:8000` 에서 실행됩니다.
 
-## API 사용법
+## 사용 방법
+
+### 웹 GUI 사용 (추천)
+
+1. 서버 실행 후 브라우저에서 접속:
+   ```
+   http://localhost:8000
+   ```
+
+2. 웹 페이지에서:
+   - 이미지를 드래그 앤 드롭하거나 클릭하여 업로드
+   - 언어 선택 (한글+영어, 한글만, 영어만 등)
+   - "텍스트 추출" 버튼 클릭
+   - 결과 확인 및 복사
+
+3. 상세 모드:
+   - "상세 모드" 체크박스 활성화
+   - 단어별 위치, 신뢰도 정보 확인 가능
+
+### API 사용법 (프로그래밍)
 
 ### 1. 서버 상태 확인
 
@@ -124,6 +144,13 @@ curl -X POST "http://localhost:8000/ocr/detailed" \
 - `eng+kor`: 영어 + 한글 (기본값)
 - 기타 언어는 Tesseract에서 지원하는 언어 코드 사용
 
+## 엔드포인트
+
+- `http://localhost:8000` - 웹 GUI
+- `http://localhost:8000/api` - API 정보
+- `http://localhost:8000/docs` - Swagger API 문서
+- `http://localhost:8000/redoc` - ReDoc API 문서
+
 ## API 문서
 
 서버 실행 후 다음 URL에서 자동 생성된 API 문서를 확인할 수 있습니다:
@@ -164,6 +191,21 @@ fetch('http://localhost:8000/ocr', {
     console.log('신뢰도:', data.confidence);
   });
 ```
+
+## Docker로 실행
+
+Docker를 사용하면 Tesseract 설치 없이 바로 실행할 수 있습니다:
+
+```bash
+# Docker 이미지 빌드
+docker-compose up --build
+
+# 또는 직접 빌드
+docker build -t ocr-server .
+docker run -p 8000:8000 ocr-server
+```
+
+서버가 http://localhost:8000 에서 실행됩니다.
 
 ## 문제 해결
 

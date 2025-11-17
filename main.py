@@ -1,11 +1,13 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import pytesseract
 from PIL import Image
 import io
 import logging
 from typing import Optional
+from pathlib import Path
 
 # 로깅 설정
 logging.basicConfig(level=logging.INFO)
@@ -26,15 +28,39 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
+# 정적 파일 서빙
+static_dir = Path(__file__).parent / "static"
+if static_dir.exists():
+    app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
+
+@app.get("/", response_class=HTMLResponse)
 async def root():
-    """서버 상태 확인"""
+    """웹 GUI 제공"""
+    index_file = Path(__file__).parent / "static" / "index.html"
+    if index_file.exists():
+        return index_file.read_text(encoding="utf-8")
+    else:
+        return {
+            "message": "OCR Server is running",
+            "version": "1.0.0",
+            "endpoints": {
+                "/ocr": "POST - 이미지 OCR 처리",
+                "/health": "GET - 서버 상태 확인",
+                "/docs": "GET - API 문서"
+            }
+        }
+
+@app.get("/api")
+async def api_info():
+    """API 정보 확인"""
     return {
-        "message": "OCR Server is running",
+        "message": "OCR Server API",
         "version": "1.0.0",
         "endpoints": {
             "/ocr": "POST - 이미지 OCR 처리",
-            "/health": "GET - 서버 상태 확인"
+            "/ocr/detailed": "POST - 상세 OCR 처리",
+            "/health": "GET - 서버 상태 확인",
+            "/docs": "GET - API 문서"
         }
     }
 

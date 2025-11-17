@@ -26,12 +26,76 @@
                 <div class="options">
                     <label for="langSelect">언어 선택:</label>
                     <select id="langSelect">
-                        <option value="eng+kor">한글 + 영어</option>
-                        <option value="kor">한글만</option>
-                        <option value="eng">영어만</option>
-                        <option value="jpn">일본어</option>
-                        <option value="chi_sim">중국어 (간체)</option>
-                        <option value="chi_tra">중국어 (번체)</option>
+                        <optgroup label="조합 (추천)">
+                            <option value="eng+kor">한글 + 영어</option>
+                            <option value="eng+jpn">영어 + 일본어</option>
+                            <option value="eng+chi_sim">영어 + 중국어(간체)</option>
+                        </optgroup>
+
+                        <optgroup label="동아시아">
+                            <option value="kor">한국어 (Korean)</option>
+                            <option value="jpn">일본어 (Japanese)</option>
+                            <option value="chi_sim">중국어 간체 (Chinese Simplified)</option>
+                            <option value="chi_tra">중국어 번체 (Chinese Traditional)</option>
+                            <option value="tha">태국어 (Thai)</option>
+                            <option value="vie">베트남어 (Vietnamese)</option>
+                        </optgroup>
+
+                        <optgroup label="유럽">
+                            <option value="eng">영어 (English)</option>
+                            <option value="fra">프랑스어 (French)</option>
+                            <option value="deu">독일어 (German)</option>
+                            <option value="spa">스페인어 (Spanish)</option>
+                            <option value="ita">이탈리아어 (Italian)</option>
+                            <option value="por">포르투갈어 (Portuguese)</option>
+                            <option value="rus">러시아어 (Russian)</option>
+                            <option value="pol">폴란드어 (Polish)</option>
+                            <option value="nld">네덜란드어 (Dutch)</option>
+                            <option value="swe">스웨덴어 (Swedish)</option>
+                            <option value="nor">노르웨이어 (Norwegian)</option>
+                            <option value="dan">덴마크어 (Danish)</option>
+                            <option value="fin">핀란드어 (Finnish)</option>
+                            <option value="ell">그리스어 (Greek)</option>
+                            <option value="tur">터키어 (Turkish)</option>
+                            <option value="ukr">우크라이나어 (Ukrainian)</option>
+                            <option value="ces">체코어 (Czech)</option>
+                            <option value="ron">루마니아어 (Romanian)</option>
+                            <option value="hun">헝가리어 (Hungarian)</option>
+                            <option value="bul">불가리아어 (Bulgarian)</option>
+                            <option value="hrv">크로아티아어 (Croatian)</option>
+                            <option value="slk">슬로바키아어 (Slovak)</option>
+                            <option value="slv">슬로베니아어 (Slovenian)</option>
+                        </optgroup>
+
+                        <optgroup label="중동">
+                            <option value="ara">아랍어 (Arabic)</option>
+                            <option value="heb">히브리어 (Hebrew)</option>
+                            <option value="fas">페르시아어 (Persian)</option>
+                        </optgroup>
+
+                        <optgroup label="남아시아">
+                            <option value="hin">힌디어 (Hindi)</option>
+                            <option value="ben">벵골어 (Bengali)</option>
+                            <option value="tam">타밀어 (Tamil)</option>
+                            <option value="tel">텔루구어 (Telugu)</option>
+                            <option value="mar">마라티어 (Marathi)</option>
+                            <option value="kan">칸나다어 (Kannada)</option>
+                            <option value="mal">말라얄람어 (Malayalam)</option>
+                            <option value="guj">구자라트어 (Gujarati)</option>
+                            <option value="pan">펀자브어 (Punjabi)</option>
+                            <option value="urd">우르두어 (Urdu)</option>
+                        </optgroup>
+
+                        <optgroup label="아프리카">
+                            <option value="afr">아프리칸스어 (Afrikaans)</option>
+                            <option value="swa">스와힐리어 (Swahili)</option>
+                        </optgroup>
+
+                        <optgroup label="기타">
+                            <option value="ind">인도네시아어 (Indonesian)</option>
+                            <option value="msa">말레이어 (Malay)</option>
+                            <option value="fil">필리핀어 (Filipino)</option>
+                        </optgroup>
                     </select>
 
                     <label>

@@ -18,7 +18,18 @@ FastAPI와 Tesseract를 사용한 로컬 OCR 서버입니다. 이미지에서 �
 #### Ubuntu/Debian
 ```bash
 sudo apt-get update
+
+# 기본 설치 (영어 + 한글)
 sudo apt-get install tesseract-ocr tesseract-ocr-kor
+
+# 모든 언어 설치 (권장 - Docker 사용 시 자동 설치됨)
+sudo apt-get install tesseract-ocr \
+  tesseract-ocr-eng tesseract-ocr-kor tesseract-ocr-jpn \
+  tesseract-ocr-chi-sim tesseract-ocr-chi-tra \
+  tesseract-ocr-fra tesseract-ocr-deu tesseract-ocr-spa \
+  tesseract-ocr-ita tesseract-ocr-por tesseract-ocr-rus \
+  tesseract-ocr-ara tesseract-ocr-hin tesseract-ocr-ben \
+  tesseract-ocr-tha tesseract-ocr-vie
 ```
 
 #### macOS
@@ -139,10 +150,59 @@ curl -X POST "http://localhost:8000/ocr/detailed" \
 
 ## 언어 옵션
 
-- `eng`: 영어만
-- `kor`: 한글만
+### 주요 언어 코드
+
+**조합 (추천)**
 - `eng+kor`: 영어 + 한글 (기본값)
-- 기타 언어는 Tesseract에서 지원하는 언어 코드 사용
+- `eng+jpn`: 영어 + 일본어
+- `eng+chi_sim`: 영어 + 중국어(간체)
+
+**동아시아**
+- `kor`: 한국어
+- `jpn`: 일본어
+- `chi_sim`: 중국어(간체)
+- `chi_tra`: 중국어(번체)
+- `tha`: 태국어
+- `vie`: 베트남어
+
+**유럽**
+- `eng`: 영어
+- `fra`: 프랑스어
+- `deu`: 독일어
+- `spa`: 스페인어
+- `ita`: 이탈리아어
+- `por`: 포르투갈어
+- `rus`: 러시아어
+- `pol`: 폴란드어
+- `nld`: 네덜란드어
+- `swe`: 스웨덴어
+- `nor`: 노르웨이어
+- `dan`: 덴마크어
+- `fin`: 핀란드어
+- `ell`: 그리스어
+- `tur`: 터키어
+- 기타: `ukr`, `ces`, `ron`, `hun`, `bul`, `hrv`, `slk`, `slv`
+
+**중동**
+- `ara`: 아랍어
+- `heb`: 히브리어
+- `fas`: 페르시아어
+
+**남아시아**
+- `hin`: 힌디어
+- `ben`: 벵골어
+- `tam`: 타밀어
+- `tel`: 텔루구어
+- 기타: `mar`, `kan`, `mal`, `guj`, `pan`, `urd`
+
+**기타**
+- `ind`: 인도네시아어
+- `msa`: 말레이어
+- `fil`: 필리핀어
+- `afr`: 아프리칸스어
+- `swa`: 스와힐리어
+
+**참고**: 언어를 조합하려면 `+`로 연결하세요 (예: `eng+kor+jpn`)
 
 ## 엔드포인트
 
@@ -219,17 +279,26 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 ```
 
-### 한글이 인식되지 않는 경우
+### 특정 언어가 인식되지 않는 경우
 
-한글 언어 팩이 설치되어 있는지 확인:
+해당 언어 팩이 설치되어 있는지 확인:
 
 ```bash
 # 설치된 언어 확인
 tesseract --list-langs
 
-# 한글 언어 팩 설치 (Ubuntu/Debian)
+# 필요한 언어 팩 설치 (Ubuntu/Debian)
+# 예: 한글
 sudo apt-get install tesseract-ocr-kor
+
+# 예: 일본어
+sudo apt-get install tesseract-ocr-jpn
+
+# 예: 아랍어
+sudo apt-get install tesseract-ocr-ara
 ```
+
+**참고**: Docker를 사용하면 모든 주요 언어가 자동으로 설치됩니다.
 
 ## 라이선스
 
